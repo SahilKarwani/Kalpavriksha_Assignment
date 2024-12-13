@@ -4,7 +4,7 @@
 
 #define FILENAME "users.txt"
 
-// defining structure for users
+
 typedef struct
 {
     int id;
@@ -60,7 +60,7 @@ int main()
     return 0;
 }
 
-// create user
+
 
 void create_user()
 {
@@ -74,7 +74,6 @@ void create_user()
     User user;
     int isUnique = 0;
 
-    // Loop until a unique ID is entered
     while (!isUnique)
     {
         printf("Enter user ID: ");
@@ -89,7 +88,7 @@ void create_user()
             isUnique = 1;
         }
     }
-    num_records++; // to maintain number of records
+    num_records++; 
     getchar();
     printf("Enter user name: ");
     fgets(user.name, sizeof(user.name), stdin);
@@ -98,7 +97,7 @@ void create_user()
     printf("Enter user age: ");
     scanf("%d", &user.age);
 
-    // Appending user
+    
     fprintf(file, "%d|%s|%d\n", user.id, user.name, user.age);
     fclose(file);
 
@@ -112,7 +111,6 @@ int find_user_by_id(int id)
         return 0;
 
     User user;
-    // scanning whole user.txt file for maintaining unique id in file
     while (fscanf(file, "%d|%[^|]|%d\n", &user.id, user.name, &user.age) != EOF)
     {
         if (user.id == id)
