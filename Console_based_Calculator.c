@@ -4,12 +4,12 @@
 
 int Max_expression_size = 100;
 
-int isdigit(char ch)
+int checkDigit(char ch)
 {
     return ch >= '0' && ch <= '9';
 }
 
-int isspace(char ch)
+int checkSpace(char ch)
 {
     return ch == ' ' || ch == '\t' || ch == '\n';
 }
@@ -53,15 +53,15 @@ int solveExpression(const char *input, int *output)
     for (int i = 0; i < strlen(input); i++)
     {
 
-        if (isspace(input[i]))
+        if (checkSpace(input[i]))
         {
             continue;
         }
 
-        if (isdigit(input[i]))
+        if (checkDigit(input[i]))
         {
             int value = 0;
-            while (i < strlen(input) && isdigit(input[i]))
+            while (i < strlen(input) && checkDigit(input[i]))
             {
                 value = value * 10 + (input[i] - '0');
                 i++;
@@ -78,7 +78,7 @@ int solveExpression(const char *input, int *output)
                 int operand2 = values[valuesTop--];
                 char operator= operators[operatorsTop--];
 
-                if (operation == '/' && operand1 == 0)
+                if (operator == '/' && operand1 == 0)
                 {
                     return 1;
                 }
@@ -96,16 +96,16 @@ int solveExpression(const char *input, int *output)
 
     while (operatorsTop >= 0)
     {
-        int b = values[valuesTop--];
-        int a = values[valuesTop--];
-        char op = operators[operatorsTop--];
+        int operand1 = values[valuesTop--];
+        int operand2 = values[valuesTop--];
+        char operator = operators[operatorsTop--];
 
-        if (op == '/' && b == 0)
+        if (operator == '/' && operand1 == 0)
         {
             return 1;
         }
 
-        values[++valuesTop] = Operation(a, b, op);
+        values[++valuesTop] = operation(operand2, operand1, operator);
     }
 
     *output = values[valuesTop];
