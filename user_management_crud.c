@@ -12,13 +12,13 @@ typedef struct
     char name[30];
 } User;
 
-int num_records = 0;
 
-void create_user();
-int find_user_by_id(int id);
-void read_users();
-void update_user();
-void delete_user();
+
+void createUser();
+int findUserById(int id);
+void readUsers();
+void updateUser();
+void deleteUser();
 
 int main()
 {
@@ -38,16 +38,16 @@ int main()
         switch (select_choice)
         {
         case 1:
-            create_user();
+            createUser();
             break;
         case 2:
-            read_users();
+            readUsers();
             break;
         case 3:
-            update_user();
+            updateUser();
             break;
         case 4:
-            delete_user();
+            deleteUser();
             break;
         case 5:
             exit(0);
@@ -62,7 +62,7 @@ int main()
 
 
 
-void create_user()
+void createUser()
 {
     FILE *file = fopen(FILENAME, "a");
     if (file == NULL)
@@ -79,7 +79,7 @@ void create_user()
         printf("Enter user ID: ");
         scanf("%d", &user.id);
 
-        if (find_user_by_id(user.id))
+        if (findUserById(user.id))
         {
             printf("ID already exists. Please enter a unique ID.\n");
         }
@@ -87,8 +87,7 @@ void create_user()
         {
             isUnique = 1;
         }
-    }
-    num_records++; 
+    } 
     getchar();
     printf("Enter user name: ");
     fgets(user.name, sizeof(user.name), stdin);
@@ -104,7 +103,7 @@ void create_user()
     printf("User added successfully.\n");
 }
 
-int find_user_by_id(int id)
+int findUserById(int id)
 {
     FILE *file = fopen(FILENAME, "r");
     if (file == NULL)
@@ -123,7 +122,7 @@ int find_user_by_id(int id)
     return 0;
 }
 
-void read_users()
+void readUsers()
 {
     FILE *file = fopen(FILENAME, "r");
     if (file == NULL)
@@ -145,7 +144,7 @@ void read_users()
     fclose(file);
 }
 
-void update_user()
+void updateUser()
 {
 
     FILE *file = fopen(FILENAME, "r");
@@ -199,7 +198,7 @@ void update_user()
     }
 }
 
-void delete_user()
+void deleteUser()
 {
     FILE *file = fopen(FILENAME, "r");
     if (file == NULL)
