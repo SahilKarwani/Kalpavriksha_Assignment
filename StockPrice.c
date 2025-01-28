@@ -6,7 +6,7 @@ struct Node {
     struct Node *next;
 };
 
-struct Node *printLL(struct Node *head) {
+struct Node *print(struct Node *head) {
     if (head == NULL) {
         printf("List is Empty\n");
         return NULL;
@@ -19,7 +19,7 @@ struct Node *printLL(struct Node *head) {
     return head;
 }
 
-struct Node *createLL(struct Node *head) {
+struct Node *create(struct Node *head) {
     int data;
     printf("Enter stock price\n");
     scanf("%d", &data);
@@ -126,13 +126,13 @@ int main() {
     printf("Enter number of stock prices you want to insert\n");
     scanf("%d", &number);
     for (int index = 0; index < number; index++) {
-        head = createLL(head);
+        head = create(head);
     }
     printf("Stock Prices Before Sorting\n");
-    head = printLL(head);
+    head = print(head);
     head = mergeSort(head);
     printf("\nStock Prices After Sorting\n");
-    head = printLL(head);
+    head = print(head);
 
     int price;
     printf("\nEnter stock price you want to search\n");
